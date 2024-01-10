@@ -1,10 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'Assignment-8-Q-2';
+export class AppComponent implements AfterViewInit {
+  receivedData: string = '';
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  receiveDataFromChild(data: string) {
+    this.receivedData = data;
+  }
+
+  ngAfterViewInit() {
+    // Manually trigger change detection after the view has been initialized
+    this.cdr.detectChanges();
+  }
 }
